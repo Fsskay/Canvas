@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #xxx {
+            background-color: green;
+            display: block;
+        }
+
+        body {
+            margin: 0;
+        }
+        button {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+<canvas id="xxx" width="300" height="300"></canvas>
+<button id="eraser">橡皮擦</button>
+</body>
+<script>
+
+    // 1.变量声明
+
+    var yyy = document.getElementById('xxx');
+    var context = yyy.getContext('2d');
+    var using = false;
+    var lastPoint = {x: undefined, y: undefined};
+
+    var pageWidth = document.documentElement.clientWidth;
+    var pageHeight = document.documentElement.clientHeight;
+    yyy.width = pageWidth;
+    yyy.height = pageHeight;
+
+    var eraserEnabled = false;
+    eraser.onclick = function(){
+        eraserEnabled = !eraserEnabled
+    };
+    
+    xxxxxx();
+
+    window.onresize = function (){
+        xxxxxx()
+    };
+
+    // 2.鼠标动作监听
+    yyy.onmousedown = function (aaa) {
+        var x = aaa.clientX;
+        var y = aaa.clientY;
+        if (eraserEnabled) {
+            using = true;
+            context.clearRect(x-5,y-5,10,10)
+        } else {
+            using = true;
+            lastPoint = {"x": x, "y": y};
+        }
+    };
+    yyy.onmousemove = function (aaa) {
+
+        var x = aaa.clientX;
+        var y = aaa.clientY;
+
+        if (eraserEnabled) {
+            if (using){
+                context.clearRect(x-5,y-5,10,10)
+            }
+        } else {
+            if (using) {
+                var newPoint = {"x": x, "y": y};
+                drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y);
+                lastPoint = newPoint
+            }
+        }
+    };
+    yyy.onmouseup = function (aaa) {
+        using = false
+    };
+
+    // 3.工具函数,画圈/连线
+    //删去的部分
+    // function drawCircle(x, y, radius) {
+    //     context.beginPath();
+    //     context.arc(x, y, radius, 0, Math.PI * 2);
+    //     context.fill()
+    // }
+
+    function drawLine(x1, y1, x2, y2) {
+        context.beginPath();
+        context.moveTo(x1, y1);
+        context.lineWidth = 5;
+        context.lineTo(x2, y2);
+        context.stroke();
+        context.closePath()
+    }
+
+    function xxxxxx() {
+        var pageWidth = document.documentElement.clientWidth;
+        var pageHeight = document.documentElement.clientHeight;
+        yyy.width = pageWidth;
+        yyy.height = pageHeight;
+    }
+</script>
+</html>
