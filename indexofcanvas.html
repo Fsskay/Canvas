@@ -31,25 +31,19 @@
     // 1.变量声明
 
     var yyy = document.getElementById('xxx');
-    var context = yyy.getContext('2d');
-    var using = false;
-    var lastPoint = {x: undefined, y: undefined};
-
-    var pageWidth = document.documentElement.clientWidth;
-    var pageHeight = document.documentElement.clientHeight;
-    yyy.width = pageWidth;
-    yyy.height = pageHeight;
+    var context = yyy.getContext('2d');     //画板的api接口
+    var using = false;      //画笔跟橡皮擦是否在使用中
+    var lastPoint = {x: undefined, y: undefined};       //最后一个点
 
     var eraserEnabled = false;
     eraser.onclick = function(){
         eraserEnabled = !eraserEnabled
-    };
+    };      //id为eraser的button按下后的功能,!eraserEnabled等于反义
     
     xxxxxx();
-
     window.onresize = function (){
         xxxxxx()
-    };
+    };      //画板全屏
 
     // 2.鼠标动作监听
     yyy.onmousedown = function (aaa) {
@@ -85,12 +79,7 @@
     };
 
     // 3.工具函数,画圈/连线
-    //删去的部分
-    // function drawCircle(x, y, radius) {
-    //     context.beginPath();
-    //     context.arc(x, y, radius, 0, Math.PI * 2);
-    //     context.fill()
-    // }
+
 
     function drawLine(x1, y1, x2, y2) {
         context.beginPath();
@@ -99,13 +88,13 @@
         context.lineTo(x2, y2);
         context.stroke();
         context.closePath()
-    }
+    }       //画线
 
     function xxxxxx() {
         var pageWidth = document.documentElement.clientWidth;
         var pageHeight = document.documentElement.clientHeight;
         yyy.width = pageWidth;
         yyy.height = pageHeight;
-    }
+    }       //画板全屏
 </script>
 </html>
