@@ -1,30 +1,49 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-Hans">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>我的画板</title>
     <style>
         #xxx {
-            background-color: green;
+            background: green;
             display: block;
         }
 
         body {
             margin: 0;
         }
-        button {
+
+        html {
+        }
+
+        .actions {
             position: fixed;
             bottom: 0;
             left: 0;
+        }
+
+        .actions > #brush {
+            display: none;
+        }
+
+        .actions.x > #brush {
+            display: inline-block;
+        }
+
+        .actions.x > #eraser {
+            display: none
         }
     </style>
 </head>
 <body>
 <canvas id="xxx" width="300" height="300"></canvas>
-<button id="eraser">橡皮擦</button>
+<div id="actions" class="actions">
+    <button id="eraser">橡皮擦</button>
+    <button id="brush">画笔</button>
+</div>
 </body>
 <script>
 
@@ -36,12 +55,12 @@
     var lastPoint = {x: undefined, y: undefined};       //最后一个点
 
     var eraserEnabled = false;
-    eraser.onclick = function(){
+    eraser.onclick = function () {
         eraserEnabled = !eraserEnabled
     };      //id为eraser的button按下后的功能,!eraserEnabled等于反义
-    
+
     xxxxxx();
-    window.onresize = function (){
+    window.onresize = function () {
         xxxxxx()
     };      //画板全屏
 
@@ -51,7 +70,7 @@
         var y = aaa.clientY;
         if (eraserEnabled) {
             using = true;
-            context.clearRect(x-5,y-5,10,10)
+            context.clearRect(x - 5, y - 5, 10, 10)
         } else {
             using = true;
             lastPoint = {"x": x, "y": y};
@@ -63,8 +82,8 @@
         var y = aaa.clientY;
 
         if (eraserEnabled) {
-            if (using){
-                context.clearRect(x-5,y-5,10,10)
+            if (using) {
+                context.clearRect(x - 5, y - 5, 10, 10)
             }
         } else {
             if (using) {
