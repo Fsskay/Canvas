@@ -96,6 +96,24 @@
         ul, ol {
             list-style: none;
         }
+        .sizes {
+            position: fixed;
+            right: 20px;
+            top: 10px;
+        }
+        .sizes > li{
+            margin:20px 0;
+        }
+        .sizes > .thin {
+            height: 0;
+            width: 20px;
+            border-top: 3px solid black;
+        }
+        .sizes > .thick {
+            height: 0;
+            width: 20px;
+            border-top: 6px solid black;
+        }
     </style>
 </head>
 
@@ -108,11 +126,21 @@
     <svg id="eraser" class="icon">
         <use xlink:href="#icon-Eraser-Tool"></use>
     </svg>
+    <svg id="clear" class="clear">
+        <use xlink:href="#icon-bin-1"></use>
+    </svg>
+    <svg id="download" class="download">
+        <use xlink:href="#icon-Download"></use>
+    </svg>
 </div>
 <ol class="colors">
     <li id="red" class="red active"></li>
     <li id="green" class="green"></li>
     <li id="blue" class="blue"></li>
+</ol>
+<ol class="sizes">
+    <li id="thin" class="thin"></li>
+    <li id="thick" class="thick"></li>
 </ol>
 </body>
 <script>
@@ -155,6 +183,26 @@
         red.classList.remove('active');
         green.classList.remove('active')
     };
+
+    thin.onclick = function () {
+        lineWidth = 5
+    };
+    thick.onclick = function () {
+        lineWidth = 10
+    };
+
+    clear.onclick = function () {
+        context.clearRect(0,0,yyy.width,yyy.height)
+    };
+    download.onclick =function () {
+        var url = yyy.toDataURL("image/png");
+        var a =document.createElement('a');
+        document.body.appendChild(a);
+        a.href = url;
+        a.download = '我的画';
+        a.target = '_blank';
+        a.click()
+    };
     // var eraserEnabled = false;
     // eraser.onclick = function() {
     //     eraserEnabled =true;
@@ -192,7 +240,7 @@
     function drawLine(x1, y1, x2, y2) {
         context.beginPath();
         context.moveTo(x1, y1); // 起点
-        context.lineWidth = 5;
+        context.lineWidth = lineWidth;
         context.lineTo(x2, y2); // 终点
         context.stroke();
         context.closePath()
@@ -287,6 +335,6 @@
 
     }
 </script>
-<script src="//at.alicdn.com/t/font_1749502_bmd76ygpwe.js">
+<script src="//at.alicdn.com/t/font_1749502_kxq9ivsix3.js">
 </script>
 </html>
